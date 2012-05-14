@@ -1,0 +1,97 @@
+VigenereCrack - Cracking Vignere Ciphers the easy way
+#####################################################
+14 May 2012
+VigenereCrack is a little tool that can be used to decipher texts encrypted with the Vignere Algorithm (http://en.wikipedia.org/wiki/Vigen%C3%A8re_cipher) .
+
+Usage
+=====
+VigenereCrack has three modes of operation. It can be used to generate a table of letter distributions
+for a specific cipher text and key length. Decrypt a cipher text with an specified password, and generate
+a pdf containing cipher text decrypted with variations of passwords generated out of the most likely password.
+
+!!!IMPORTANT!!!
+By default the script assumes Spanish language as the natural language.
+In order to crack English texts, three variables need to be adapted in main()
+
+Letter distribution table:
+''''''''''''''''''''''''''
+To generate a letter distribution table out of the cipher Text A1, and with a assumed key length of 16
+
+python3 VigenereCrack.py ../../CriptoCompeticion/TextosConcurs/A1.txt 16
+
+Create letter distribution table only!
+Finding most likely passwords with 16 characters ...
+
+
+Distance of the letter distribution frequency to Spanish. (lower values are better , lowest are marked with *)
+
+Column  00      01      02      03      04      05      06      07      08      09      10      11      12      13      14      15    
+[A]: [3.667] [4.120] [3.755] *3.204* [3.396] *3.360* [3.622] [3.799] [3.892] [3.704] [3.522] [3.662] [3.463] [4.012] [3.699] [3.913] [A]: 
+[B]: [3.798] [3.999] [4.065] [3.928] [4.067] [3.867] [3.835] [4.266] [4.155] [4.206] [4.169] [4.233] [4.057] [3.932] [3.477] [3.802] [B]: 
+[C]: *3.149* *3.012* *3.169* [3.379] *3.177* *3.058* *3.089* *3.413* *3.073* *3.232* *2.903* *3.273* *3.106* *3.024* [3.432] *3.320* [C]: 
+[D]: [4.469] [4.274] [4.641] [4.277] [4.113] [4.333] [4.335] [3.782] [4.302] *3.465* [3.948] [3.894] [4.378] [4.197] [3.817] [3.997] [D]: 
+[E]: [4.211] [3.519] [3.601] [3.517] *3.279* [3.763] [3.870] [3.985] [3.825] [3.604] [3.873] [3.890] [3.897] [3.816] [3.988] [3.659] [E]: 
+[F]: [4.037] [4.220] [4.323] [4.281] [4.030] [4.462] [4.440] [3.603] [4.029] [3.732] [4.608] [4.009] [4.074] [3.823] [3.878] [3.974] [F]: 
+[G]: [3.387] *3.036* [3.657] *3.271* [3.560] [3.712] [3.324] [3.544] *2.888* [3.605] *3.097* *3.374* [3.789] [3.671] [4.038] [4.239] [G]: 
+[H]: [4.159] [4.308] [4.259] [4.407] [4.381] [3.910] [4.550] [4.286] [4.199] [4.236] [4.204] [4.193] [3.763] [4.138] [3.874] [3.993] [H]: 
+[I]: [4.076] [3.906] [3.534] [3.922] [3.972] [4.033] [3.635] [3.593] [3.923] [4.032] [4.069] [4.124] [4.036] [3.946] [4.176] [4.193] [I]: 
+[J]: [3.425] [4.100] [3.569] [3.823] [3.775] [3.949] [3.570] [3.838] [3.826] [3.802] [4.269] [4.045] *3.318* [3.670] [3.379] [3.430] [J]: 
+[K]: *3.227* [3.703] [3.756] [3.821] [4.004] [3.926] [3.687] [3.838] [3.355] [4.054] [3.111] [3.628] [3.918] [4.004] [4.162] [3.801] [K]: 
+[L]: [3.954] [3.881] [4.253] [3.961] [3.955] [3.691] [4.071] [3.964] [4.243] [3.825] [3.636] [3.673] [3.608] [3.652] [3.941] [3.729] [L]: 
+[M]: [4.029] [3.804] *3.410* [3.478] [3.689] [3.520] [3.512] [3.601] [3.723] [3.983] [3.936] [3.831] [4.048] [3.851] [4.197] [3.609] [M]: 
+[N]: [3.587] [3.911] [3.666] [3.420] [3.500] [3.778] [3.603] [4.061] [3.826] [3.538] [4.064] [3.850] [3.676] *3.251* *3.334* [3.363] [N]: 
+[Ñ]: [3.998] [3.956] [3.977] [4.192] [4.247] [3.732] [3.612] [4.369] [3.848] [4.286] [3.723] [3.428] [4.572] [3.921] [3.643] [3.909] [Ñ]: 
+[O]: [4.451] [3.658] [3.953] [4.097] [3.653] [3.696] [4.260] [3.979] [4.728] [3.685] [3.624] [3.649] [3.531] [4.361] [3.758] [4.131] [O]: 
+[P]: [3.801] [3.857] [3.955] [3.951] [3.976] [3.516] [4.110] [3.432] [3.759] [4.044] [4.235] [4.193] [4.077] [4.223] [4.275] [4.299] [P]: 
+[Q]: [3.551] [3.661] [3.814] [3.533] [3.716] [4.027] [3.942] [3.946] [3.550] [3.656] [3.796] [4.026] [3.626] [3.739] *3.336* [3.795] [Q]: 
+[R]: [4.233] [3.782] [3.665] [3.660] [3.826] [4.089] [4.095] [3.896] [3.688] [3.711] [3.867] [4.147] [3.902] [4.095] [3.555] [3.849] [R]: 
+[S]: [3.762] [4.089] [4.225] [4.444] [3.938] [4.184] [4.173] [3.520] [4.056] [3.542] [3.571] [4.025] [3.592] [3.926] [3.846] [4.029] [S]: 
+[T]: [3.442] [3.633] [3.509] [3.523] [3.374] [3.449] *3.240* *3.299* [3.689] [3.476] [3.914] [3.665] [3.888] [3.334] [4.125] *3.304* [T]: 
+[U]: [3.525] [3.602] [4.120] [3.385] [3.787] [4.137] [3.688] [3.917] [3.417] [3.757] [3.860] [3.719] [3.708] [3.476] [3.925] [4.084] [U]: 
+[V]: [4.239] [3.969] [4.196] [3.960] [4.195] [3.991] [3.692] [4.039] [3.688] [4.267] [3.982] [3.808] [4.080] [3.870] [4.186] [3.596] [V]: 
+[W]: [4.121] [4.101] [3.765] [3.894] [3.785] [3.736] [4.117] [3.882] [3.760] [3.956] [3.733] [3.452] [3.733] [3.816] [3.926] [3.956] [W]: 
+[X]: [3.803] [3.811] [3.476] [4.128] [4.142] [4.070] [3.781] [3.769] [3.806] [4.186] [4.330] [3.781] [3.927] [3.848] [4.135] [3.705] [X]: 
+[Y]: [3.505] [3.572] [3.636] [4.072] [3.813] [3.665] [3.798] [3.849] [3.857] [3.763] [3.636] [4.095] [3.784] [3.694] [3.649] [3.900] [Y]: 
+[Z]: [4.145] [4.271] [3.805] [4.226] [4.407] [4.101] [4.105] [4.285] [4.650] [4.407] [4.074] [4.088] [4.203] [4.460] [4.005] [4.178] [Z]: 
+Column  00      01      02      03      04      05      06      07      08      09      10      11      12      13      14      15    
+
+Most likely password is: CCCACCCTGCCCCCNT xTotal 50.220 , xClearText 0.044
+
+The table shows the distance of a letter distribution for each column of the cipher text to the letter distribution used for analysing.
+The value is calculated by x = sum[ sqrt( (n * f)**2 ) * 100 ] , over every letter of the alphabet.
+n ... the letter distribution found in the text, f ... letter distribution in the natural language
+
+Meaning that lower values represent distributions that follow more closely the natural language distribution. ( 0 being an identical distribution )
+
+The most likely password is than generated by choosing the letter with the lowest x in for every column.
+
+
+Decrypt Text
+''''''''''''
+To decrypt the text A1 with the password JSNGJCCTWAGQCTCXMDMKA and to store the result into clearText.txt
+
+python3 VigenereCrack.py ../../CriptoCompeticion/TextosConcurs/A1.txt JSNGJCCTWAGQCTCXMDMKA clearText.txt
+
+Decrypting file ../../CriptoCompeticion/TextosConcurs/A1.txt with password JSNGJCCTWAGQCTCXMDMKA, writing solution to clearText.txt
+
+Finding the right password
+''''''''''''''''''''''''''
+If the most likely keys dont make up the password, used, its possible to let the script generate variations of close by passwords
+and encrypt parts of the cipher text with those passwords. The result will be fused together in an single pdf file and can than
+be used to guess the right password.
+
+To do this for the cipher text A1, a password length of 21 and to store the solution in output.pdf call
+ 
+python3 VigenereCrack.py ../../CriptoCompeticion/TextosConcurs/A1.txt 21 output.pdf
+
+Note: this will generate a sub folder called out containing a text file for every password and deciphered text
+
+Bugs
+####
+Well, time will tell ...
+
+Notes
+#####
+If you make any real of this application or want a neat feature, let me know!
+
+Author: Pasieka Manuel , mapa17@posgrado.upv.es
